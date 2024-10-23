@@ -52,15 +52,11 @@ jobs:
           if [[ "${{ github.ref_name }}" == "main" ]]; then
             echo "Git_Tag=ghcr.io/${{ github.repository_owner }}/fastgpt:latest" >> $GITHUB_ENV
             echo "Git_Latest=ghcr.io/${{ github.repository_owner }}/fastgpt:latest" >> $GITHUB_ENV
-            echo "Ali_Tag=${{ secrets.ALI_IMAGE_NAME }}/fastgpt:latest" >> $GITHUB_ENV
-            echo "Ali_Latest=${{ secrets.ALI_IMAGE_NAME }}/fastgpt:latest" >> $GITHUB_ENV
             echo "Docker_Hub_Tag=${{ secrets.DOCKER_IMAGE_NAME }}/fastgpt:latest" >> $GITHUB_ENV
             echo "Docker_Hub_Latest=${{ secrets.DOCKER_IMAGE_NAME }}/fastgpt:latest" >> $GITHUB_ENV
           else
             echo "Git_Tag=ghcr.io/${{ github.repository_owner }}/fastgpt:${{ github.ref_name }}" >> $GITHUB_ENV
             echo "Git_Latest=ghcr.io/${{ github.repository_owner }}/fastgpt:latest" >> $GITHUB_ENV
-            echo "Ali_Tag=${{ secrets.ALI_IMAGE_NAME }}/fastgpt:${{ github.ref_name }}" >> $GITHUB_ENV
-            echo "Ali_Latest=${{ secrets.ALI_IMAGE_NAME }}/fastgpt:latest" >> $GITHUB_ENV
             echo "Docker_Hub_Tag=${{ secrets.DOCKER_IMAGE_NAME }}/fastgpt:${{ github.ref_name }}" >> $GITHUB_ENV
             echo "Docker_Hub_Latest=${{ secrets.DOCKER_IMAGE_NAME }}/fastgpt:latest" >> $GITHUB_ENV
           fi
@@ -79,8 +75,6 @@ jobs:
           --cache-to=type=local,dest=/tmp/.buildx-cache \
           -t ${Git_Tag} \
           -t ${Git_Latest} \
-          -t ${Ali_Tag} \
-          -t ${Ali_Latest} \
           -t ${Docker_Hub_Tag} \
           -t ${Docker_Hub_Latest} \
           .
